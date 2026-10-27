@@ -1,7 +1,10 @@
 package com.aitor.recyclerview_aitor_mera
 
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -20,6 +23,9 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+
+
+
         }
 
         val nombres = arrayOf("Paquito", "Marcos", "Aitor", "Hector", "Miguel",
@@ -41,6 +47,32 @@ class MainActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.rvContacts)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = customAdapter
+
+
+        val fab: View = findViewById(R.id.fab)
+        fab.setOnClickListener { view ->
+            val dialogView = layoutInflater.inflate(R.layout.dialog_add_contact, null)
+            val etName: EditText = dialogView.findViewById(R.id.etName)
+            val etPhone: EditText = dialogView.findViewById(R.id.etPhone)
+
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            builder
+                .setTitle("Nuevo contacto")
+                .setView(dialogView)
+                .setPositiveButton("Añadir") { dialog, which ->
+                    val name = etName.text.toString()
+                    val phone = etPhone.text.toString()
+                    contacts.add(Contact(name, phone))
+                    customAdapter.notifyItemInserted(contacts.size - 1)
+                    recyclerView.scrollToPosition(contacts.size - 1)
+                }
+                .setNegativeButton("Cancelar") { dialog, which ->
+                    dialog.cancel()
+                }
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+        }
     }
+
 }
-data class Contact(val name: String, val phone: String)
