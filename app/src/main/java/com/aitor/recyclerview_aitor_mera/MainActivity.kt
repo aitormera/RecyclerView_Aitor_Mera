@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        val nombres = arrayOf("Paquito", "Marcos", "Aitor", "Hector", "Miguel",
+        val nombres = arrayOf("Paquito", "Marcos", "Aitor", "Hector", "Raul",
             "Ivan", "Paula", "Miguel", "Unai", "Marc")
         val apellidos = arrayOf("Mera", "Muriel", "Martinez", "Fernandez", "Gomez",
             "Grajea", "Romero", "Soler", "Torres", "Roca")
