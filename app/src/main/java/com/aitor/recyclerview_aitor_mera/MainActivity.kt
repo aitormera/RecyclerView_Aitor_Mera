@@ -36,9 +36,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val rvContacts = findViewById<RecyclerView>(R.id.rvContacts)
-        rvContacts.layoutManager = LinearLayoutManager(this)
-        rvContacts.adapter = ContactAdapter(contacts)
+        val customAdapter = ContactAdapter(contacts)
+
+        val recyclerView: RecyclerView = findViewById(R.id.rvContacts)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = customAdapter
     }
 }
 data class Contact(val name: String, val phone: String)
